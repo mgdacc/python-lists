@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación Interactiva: Listas en Python</title>
+    <style>
+        /* === ESTILOS GLOBALES Y DE ESCRITORIO === */
+        body {
+            font-family: Arial, sans-serif; background-color: #f0f0f0; margin: 0;
+            padding: 40px; display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; box-sizing: border-box; transition: padding 0.3s ease;
+        }
+
+        .slideshow-container { position: relative; width: 90%; max-width: 960px; }
+        
+        .slide {
+            display: none; background-color: #fff; border: 1px solid #ccc;
+            height: 540px; padding: 40px 60px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            flex-direction: column; justify-content: center; position: relative;
+            box-sizing: border-box;
+        }
+
+        .fade { animation-name: fade; animation-duration: 0.5s; }
+        @keyframes fade { from {opacity: .4} to {opacity: 1} }
+
+        .prev, .next {
+            cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%);
+            width: 50px; height: 50px; background-color: #cccccc; color: #333;
+            border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: flex; justify-content: center; align-items: center;
+            font-weight: bold; font-size: 24px; transition: all 0.3s ease;
+            user-select: none; z-index: 10;
+        }
+
+        .prev { left: -70px; }
+        .next { right: -70px; }
+        .prev:hover, .next:hover { background-color: #aaaaaa; }
+
+        .slide h1 { font-size: 3.5em; text-align: center; border-bottom: 4px solid #11a80; padding-bottom: 20px; color: #005A9C; }
+        .slide h2 { font-size: 2.8em; margin-top: 0; margin-bottom: 30px; text-align: center; color: #005A9C; }
+        .single-content { text-align: center; }
+        .single-content p { font-size: 1.5em; color: #444; }
+        .single-content pre { font-size: 1.4em; display: inline-block; text-align: left; max-width: 100%; }
+        pre { background-color: #2d3436; color: #fff; padding: 15px; border-radius: 5px; font-size: 1.1em; white-space: pre-wrap; }
+        .footer { position: absolute; bottom: 20px; right: 40px; font-size: 1em; color: #888; }
+
+        /* === MEDIA QUERIES === */
+        @media screen and (max-width: 768px) {
+            body { padding: 15px; }
+            .slideshow-container { width: 100%; padding-bottom: 75px; }
+            .slide { height: auto; min-height: 75vh; padding: 20px 25px; }
+            .prev, .next { top: auto; bottom: 15px; width: 45px; height: 45px; }
+            .prev { left: 50%; transform: translateX(-110%); }
+            .next { left: 50%; transform: translateX(10%); right: auto; }
+            .slide h1 { font-size: 2.2em; }
+            .slide h2 { font-size: 1.8em; }
+            .single-content p { font-size: 1.1em; }
+            .single-content pre { font-size: 1em; }
+            .footer { font-size: 0.8em; right: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slideshow-container">
+        
+        <div class="slide fade">
+            <h1>Cheat Sheet de Python</h1>
+            <h2 style="color:#333; border:none;">Listas</h2>
+            <div class="footer">1 / 16</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>¿Qué es una Lista?</h2>
+            <div class="single-content"><p>Una colección ordenada y modificable de elementos. Permite duplicados.</p></div>
+            <div class="footer">2 / 16</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Crear una Lista</h2>
+            <div class="single-content"><p>Se define con corchetes `[]`, separando los elementos con comas.</p><pre><code># Lista de números
+numeros = [1, 2, 3, 4, 5]
+
+# Lista de strings
+frutas = ["manzana", "banana", "cereza"]</code></pre></div>
+            <div class="footer">3 / 16</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Acceder a Elementos (Índice)</h2>
+            <div class="single-content"><p>Se accede a un elemento por su posición, comenzando desde 0.</p><pre><code>frutas = ["manzana", "banana", "cereza"]
+print(frutas[0]) # 'manzana'
+print(frutas[1]) # 'banana'</code></pre></div>
+            <div class="footer">4 / 16</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Índice Negativo</h2>
+            <div class="single-content"><p>Permite acceder a los elementos desde el final de la lista.</p><pre><code>frutas = ["manzana", "banana", "cereza"]
+print(frutas[-1]) # 'cereza'
+print(frutas[-2]) # 'banana'</code></pre></div>
+            <div class="footer">5 / 16</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Slicing (Rebanado)</h2>
+            <div class="single-content"><p>Permite obtener una sub-lista especificando un rango de índices.</p><pre><code>numeros = [0, 1, 2, 3, 4, 5]
+print(numeros[2:5]) # [2, 3, 4]
+print(numeros[:3])  # [0, 1, 2]</code></pre></div>
+            <div class="footer">6 / 16</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Modificar un Elemento</h2>
+            <div class="single-content"><p>Se puede cambiar el valor de un elemento usando su índice.</p><pre><code>frutas = ["manzana", "banana", "cereza"]
+frutas[1] = "mango"
+print(frutas) # ['manzana', 'mango', 'cereza']</code></pre></div>
+            <div class="footer">7 / 16</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Método: <code>.append()</code></h2>
+            <div class="single-content"><p>Añade un elemento al final de la lista.</p><pre><code>frutas = ["manzana", "banana"]
+frutas.append("naranja")
+print(frutas) # ['manzana', 'banana', 'naranja']</code></pre></div>
+            <div class="footer">8 / 16</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Método: <code>.insert()</code></h2>
+            <div class="single-content"><p>Añade un elemento en una posición específica.</p><pre><code>frutas = ["manzana", "cereza"]
+frutas.insert(1, "banana")
+print(frutas) # ['manzana', 'banana', 'cereza']</code></pre></div>
+            <div class="footer">9 / 16</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Método: <code>.pop()</code></h2>
+            <div class="single-content"><p>Elimina y devuelve el último elemento (o el de un índice específico).</p><pre><code>frutas = ["manzana", "banana", "cereza"]
+fruta_eliminada = frutas.pop()
+print(fruta_eliminada) # 'cereza'
+print(frutas) # ['manzana', 'banana']</code></pre></div>
+            <div class="footer">10 / 16</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Método: <code>.remove()</code></h2>
+            <div class="single-content"><p>Elimina la primera aparición de un valor específico.</p><pre><code>frutas = ["manzana", "banana", "manzana"]
+frutas.remove("manzana")
+print(frutas) # ['banana', 'manzana']</code></pre></div>
+            <div class="footer">11 / 16</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Método: <code>.sort()</code></h2>
+            <div class="single-content"><p>Ordena la lista de forma ascendente (alfabética o numérica).</p><pre><code>numeros = [4, 1, 8, 2]
+numeros.sort()
+print(numeros) # [1, 2, 4, 8]</code></pre></div>
+            <div class="footer">12 / 16</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Método: <code>.reverse()</code></h2>
+            <div class="single-content"><p>Invierte el orden de los elementos de la lista.</p><pre><code>frutas = ["manzana", "banana", "cereza"]
+frutas.reverse()
+print(frutas) # ['cereza', 'banana', 'manzana']</code></pre></div>
+            <div class="footer">13 / 16</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Función: <code>len()</code></h2>
+            <div class="single-content"><p>Devuelve el número de elementos que contiene la lista.</p><pre><code>frutas = ["manzana", "banana", "cereza"]
+print(len(frutas)) # 3</code></pre></div>
+            <div class="footer">14 / 16</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Operador: <code>in</code></h2>
+            <div class="single-content"><p>Verifica si un elemento existe dentro de la lista.</p><pre><code>frutas = ["manzana", "banana", "cereza"]
+if "banana" in frutas:
+    print("Sí, tenemos bananas.")</code></pre></div>
+            <div class="footer">15 / 16</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Recorrer una Lista (Loop)</h2>
+            <div class="single-content"><p>Se usa un ciclo `for` para ejecutar una acción en cada elemento.</p><pre><code>for fruta in ["manzana", "banana", "cereza"]:
+    print(f"Me gusta comer {fruta}")</code></pre></div>
+            <div class="footer">16 / 16</div>
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+    <script>
+        let slideIndex = 1; showSlides(slideIndex);
+        function plusSlides(n) { showSlides(slideIndex += n); }
+        function showSlides(n) {
+            let i, slides = document.getElementsByClassName("slide");
+            if (n > slides.length) { slideIndex = 1 } 
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
+            slides[slideIndex - 1].style.display = "flex";
+        }
+    </script>
+
+</body>
+</html>
